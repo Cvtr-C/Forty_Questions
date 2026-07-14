@@ -1,0 +1,22 @@
+import cv2
+from matplotlib import pyplot as plt
+
+img = cv2.imread("arara.jpg", 0)
+plt.hist(img.ravel(), bins=256, range=[0, 256])
+plt.title("Histograma")
+plt.xlabel("Intensidade")
+plt.ylabel("Quantidade de pixels")
+plt.savefig("Histograma.jpg")
+plt.close()
+cv2.imwrite("Arara_cinza.jpg", img)
+sobelX = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=3)
+sobelY = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=3)
+sobelT = cv2.magnitude(sobelX, sobelY)
+sobel_final = cv2.convertScaleAbs(sobelT)
+plt.hist(sobel_final.ravel(), bins=256, range=[0, 256])
+plt.title("Histograma Sobel")
+plt.xlabel("Intensidade")
+plt.ylabel("Quantidade de pixels")
+plt.savefig("Histograma_sobel.jpg")
+plt.close()
+cv2.imwrite("Arara_sobel.jpg", sobel_final)

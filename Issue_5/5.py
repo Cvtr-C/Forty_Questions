@@ -1,0 +1,18 @@
+import cv2
+
+img = cv2.imread("arara.jpg")
+# Transformar a imagem em cinza sem o (,0)
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# Filtros da Média (Borrar) e Mediana (Corrigir imperfeições e borrar um pouco)
+media = cv2.blur(img_gray, (3, 3))
+mediana = cv2.medianBlur(img_gray, 3)
+cv2.imshow("media", media)
+cv2.imshow("mediana", mediana)
+cv2.imshow("imagem", img)
+cv2.imshow("imagem_cinza", img_gray)
+cv2.imwrite("media.jpg", media)
+cv2.imwrite("mediana.jpg", mediana)
+cv2.imwrite("imagem.jpg", img)
+cv2.imwrite("imagem_cinza.jpg", img_gray)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
